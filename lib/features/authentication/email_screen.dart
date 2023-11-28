@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:nc_flutter_tiktok/constants/gaps.dart';
 import 'package:nc_flutter_tiktok/constants/sizes.dart';
-import 'package:nc_flutter_tiktok/features/authentication/email_screen.dart';
 import 'package:nc_flutter_tiktok/features/authentication/widgets/form_button.dart';
 
-class UsernameScreen extends StatefulWidget {
-  const UsernameScreen({super.key});
+class EmailScreen extends StatefulWidget {
+  const EmailScreen({super.key});
 
   @override
-  State<UsernameScreen> createState() => _UsernameScreenState();
+  State<EmailScreen> createState() => _EmailScreenState();
 }
 
-class _UsernameScreenState extends State<UsernameScreen> {
+class _EmailScreenState extends State<EmailScreen> {
   final TextEditingController _usernameController = TextEditingController();
   String _username = '';
 
@@ -32,16 +31,6 @@ class _UsernameScreenState extends State<UsernameScreen> {
     super.dispose(); // 나중에 호출
   }
 
-  void _onNextTap() {
-    if (_username.isNotEmpty) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const EmailScreen(),
-        ),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,19 +48,10 @@ class _UsernameScreenState extends State<UsernameScreen> {
           children: [
             Gaps.v40,
             const Text(
-              'Create username',
+              'What is your email?',
               style: TextStyle(
                 fontSize: Sizes.size24,
                 fontWeight: FontWeight.w700,
-              ),
-            ),
-            Gaps.v10,
-            const Text(
-              'You can always change this later.',
-              style: TextStyle(
-                fontSize: Sizes.size16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black54,
               ),
             ),
             Gaps.v16,
@@ -79,7 +59,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
               controller: _usernameController,
               cursorColor: Theme.of(context).primaryColor,
               decoration: InputDecoration(
-                hintText: 'Username',
+                hintText: 'Email',
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.grey.shade400,
@@ -93,10 +73,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
               ),
             ),
             Gaps.v24,
-            FormButton(
-              disabled: _username.isEmpty,
-              onTap: _onNextTap,
-            )
+            // FormButton(disabled: _username.isEmpty, onTap: _,)
           ],
         ),
       ),
