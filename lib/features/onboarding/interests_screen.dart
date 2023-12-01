@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nc_flutter_tiktok/constants/gaps.dart';
 import 'package:nc_flutter_tiktok/constants/sizes.dart';
+import 'package:nc_flutter_tiktok/features/onboarding/tutorial_screen.dart';
 import 'package:nc_flutter_tiktok/features/onboarding/widgets/interest_button.dart';
 
 const interests = [
@@ -83,6 +84,14 @@ class _InterestsScreenState extends State<InterestsScreen> {
     super.dispose();
   }
 
+  void _onNextTap() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TutorialScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,7 +149,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
           child: CupertinoButton(
             color: Theme.of(context).primaryColor,
             child: Text('Next'),
-            onPressed: () => {},
+            onPressed: _onNextTap,
           ),
         ));
   }
