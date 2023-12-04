@@ -4,6 +4,7 @@ import 'package:nc_flutter_tiktok/constants/gaps.dart';
 
 class NavBar extends StatelessWidget {
   final IconData icon;
+  final IconData selectedIcon;
   final String text;
   final bool isSelected;
   final Function onTap;
@@ -14,6 +15,7 @@ class NavBar extends StatelessWidget {
     required this.text,
     required this.isSelected,
     required this.onTap,
+    required this.selectedIcon,
   });
 
   @override
@@ -32,7 +34,7 @@ class NavBar extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 FaIcon(
-                  icon,
+                  isSelected ? selectedIcon : icon,
                   color: Colors.white,
                 ),
                 Gaps.v5,
