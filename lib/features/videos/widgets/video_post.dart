@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nc_flutter_tiktok/constants/gaps.dart';
 import 'package:nc_flutter_tiktok/constants/sizes.dart';
+import 'package:nc_flutter_tiktok/features/videos/widgets/video_button.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -24,7 +26,7 @@ class _VideoPostState extends State<VideoPost>
       VideoPlayerController.asset('assets/videos/video.mp4');
 
   bool _isPaused = false;
-  final Duration _animationDuration = Duration(milliseconds: 200);
+  final Duration _animationDuration = const Duration(milliseconds: 200);
 
   late final AnimationController _animationController;
 
@@ -40,6 +42,7 @@ class _VideoPostState extends State<VideoPost>
   void _initVideoPlayer() async {
     await _videoPlayerController.initialize();
     setState(() {});
+    await _videoPlayerController.setLooping(true);
     _videoPlayerController.addListener(_onVideoChange);
   }
 
@@ -114,7 +117,7 @@ class _VideoPostState extends State<VideoPost>
                   child: AnimatedOpacity(
                     duration: _animationDuration,
                     opacity: _isPaused ? 1 : 0,
-                    child: FaIcon(
+                    child: const FaIcon(
                       FontAwesomeIcons.play,
                       color: Colors.white,
                       size: Sizes.size48,
@@ -122,6 +125,63 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
               ),
+            ),
+          ),
+          const Positioned(
+            bottom: 30,
+            left: 20,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '@moztiq',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Sizes.size20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Gaps.v10,
+                Text(
+                  'mozart music quiz',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Sizes.size14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Positioned(
+            bottom: 30,
+            right: 20,
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  child: Text('moz'),
+                  foregroundImage: NetworkImage(
+                    'https://avatars.githubusercontent.com/u/12403584?v=4',
+                  ),
+                ),
+                Gaps.v24,
+                VideoButton(
+                  icon: FontAwesomeIcons.solidHeart,
+                  text: '2.9M',
+                ),
+                Gaps.v24,
+                VideoButton(
+                  icon: FontAwesomeIcons.solidComment,
+                  text: '33.3K',
+                ),
+                Gaps.v24,
+                VideoButton(
+                  icon: FontAwesomeIcons.share,
+                  text: 'Share',
+                )
+              ],
             ),
           )
         ],
