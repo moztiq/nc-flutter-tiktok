@@ -12,6 +12,7 @@ class VideoComments extends StatefulWidget {
 
 class _VideoCommentsState extends State<VideoComments> {
   bool _isWriting = false;
+  final ScrollController _scrollController = ScrollController();
 
   void _onClosedPressed() {
     Navigator.of(context).pop();
@@ -57,61 +58,66 @@ class _VideoCommentsState extends State<VideoComments> {
         ),
         body: GestureDetector(
           onTap: _onStopWriting,
-          child: ListView.separated(
-            padding: const EdgeInsets.symmetric(
-              vertical: Sizes.size10,
-              horizontal: Sizes.size16,
-            ),
-            itemCount: 10,
-            itemBuilder: (context, index) => Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const CircleAvatar(
-                  child: Text('moz'),
-                ),
-                Gaps.h10,
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+          child: Scrollbar(
+            controller: _scrollController,
+            child: ListView.separated(
+              padding: const EdgeInsets.only(
+                top: Sizes.size10,
+                bottom: Sizes.size96 + Sizes.size20,
+                left: Sizes.size16,
+                right: Sizes.size16,
+              ),
+              itemCount: 10,
+              itemBuilder: (context, index) => Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CircleAvatar(
+                    child: Text('moz'),
+                  ),
+                  Gaps.h10,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'moz',
+                          style: TextStyle(
+                            fontSize: Sizes.size16,
+                            color: Colors.grey.shade600,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Gaps.v5,
+                        const Text(
+                          'How am I supposed to be without you? Too so long.. HOw ??',
+                        ),
+                      ],
+                    ),
+                  ),
+                  Gaps.h10,
+                  Column(
                     children: [
+                      FaIcon(
+                        FontAwesomeIcons.heart,
+                        color: Colors.grey.shade500,
+                        size: Sizes.size20,
+                      ),
+                      Gaps.v5,
                       Text(
-                        'moz',
+                        '52.2K',
                         style: TextStyle(
-                          fontSize: Sizes.size16,
-                          color: Colors.grey.shade600,
+                          color: Colors.grey.shade500,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Gaps.v5,
-                      const Text(
-                        'How am I supposed to be without you? Too so long.. HOw ??',
-                      ),
                     ],
                   ),
-                ),
-                Gaps.h10,
-                Column(
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.heart,
-                      color: Colors.grey.shade500,
-                      size: Sizes.size20,
-                    ),
-                    Gaps.v5,
-                    Text(
-                      '52.2K',
-                      style: TextStyle(
-                        color: Colors.grey.shade500,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                ],
+              ),
+              separatorBuilder: (BuildContext context, int index) {
+                return Gaps.v24;
+              },
             ),
-            separatorBuilder: (BuildContext context, int index) {
-              return Gaps.v24;
-            },
           ),
         ),
         bottomSheet: BottomAppBar(
