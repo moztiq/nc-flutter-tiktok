@@ -92,6 +92,7 @@ class _VideoPostState extends State<VideoPost>
       _onTogglePause();
     }
     await showModalBottomSheet(
+      scrollControlDisabledMaxHeightRatio: 0.75,
       context: context,
       // backgroundColor: Colors.transparent,
       builder: (context) => VideoComments(),

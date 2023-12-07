@@ -91,7 +91,7 @@ class VideoComments extends StatelessWidget {
             return Gaps.v24;
           },
         ),
-        bottomNavigationBar: BottomAppBar(
+        bottomSheet: BottomAppBar(
           color: Colors.white,
           child: Row(
             children: [
@@ -100,6 +100,27 @@ class VideoComments extends StatelessWidget {
                 backgroundColor: Colors.grey.shade500,
                 foregroundColor: Colors.white,
                 child: const Text('moz'),
+              ),
+              Gaps.h10,
+              Expanded(
+                child: TextField(
+                  cursorColor: Theme.of(context).primaryColor,
+                  decoration: InputDecoration(
+                    hintText: 'Add comment..',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                        Sizes.size14,
+                      ),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey.shade300,
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: Sizes.size12,
+                      horizontal: Sizes.size10,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
