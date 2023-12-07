@@ -39,10 +39,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: _selectedIndex == 0 ? Colors.black : Colors.white,
       body: Stack(children: [
         Offstage(
           offstage: _selectedIndex != 0,
-          child: VideoTimelineScreen(),
+          child: const VideoTimelineScreen(),
         ),
         Offstage(
           offstage: _selectedIndex != 1,
