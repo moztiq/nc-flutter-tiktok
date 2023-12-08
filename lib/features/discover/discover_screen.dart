@@ -13,15 +13,15 @@ class DiscoverScreen extends StatelessWidget {
       length: tabs.length,
       child: Scaffold(
           appBar: AppBar(
-            title: Text('Discover'),
+            title: const Text('Discover'),
             bottom: TabBar(
               splashFactory: NoSplash.splashFactory,
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: Sizes.size16,
               ),
               isScrollable: true,
               labelColor: Colors.black,
-              labelStyle: TextStyle(
+              labelStyle: const TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: Sizes.size16,
               ),
@@ -37,7 +37,25 @@ class DiscoverScreen extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              for (var tab in tabs)
+              Padding(
+                padding: const EdgeInsets.all(Sizes.size6),
+                child: GridView.builder(
+                  itemCount: 20,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: Sizes.size10,
+                    mainAxisSpacing: Sizes.size10,
+                    childAspectRatio: 9 / 16,
+                  ),
+                  itemBuilder: (context, index) => Container(
+                    color: Colors.blue,
+                    child: Center(
+                      child: Text('$index'),
+                    ),
+                  ),
+                ),
+              ),
+              for (var tab in tabs.skip(1))
                 Center(
                   child: Text(tab),
                 ),
