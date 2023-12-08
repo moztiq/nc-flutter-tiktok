@@ -6,16 +6,39 @@ import 'package:nc_flutter_tiktok/constants/sizes.dart';
 
 final tabs = ['Top', 'Users', 'Videos', 'Sounds', 'LIVE', 'Shopping', 'Brands'];
 
-class DiscoverScreen extends StatelessWidget {
+class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
+
+  @override
+  State<DiscoverScreen> createState() => _DiscoverScreenState();
+}
+
+class _DiscoverScreenState extends State<DiscoverScreen> {
+  final TextEditingController _textEditingController =
+      TextEditingController(text: "Initial Text");
+
+  void _onChanged(String value) {}
+
+  void _onSubmitted(String value) {}
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
-            title: const Text('Discover'),
+            title: CupertinoSearchTextField(
+              controller: _textEditingController,
+              onChanged: _onChanged,
+              onSubmitted: _onSubmitted,
+            ),
             bottom: TabBar(
               splashFactory: NoSplash.splashFactory,
               padding: const EdgeInsets.symmetric(
@@ -42,6 +65,8 @@ class DiscoverScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(Sizes.size6),
                 child: GridView.builder(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
                   itemCount: 20,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -51,13 +76,21 @@ class DiscoverScreen extends StatelessWidget {
                   ),
                   itemBuilder: (context, index) => Column(
                     children: [
-                      AspectRatio(
-                        aspectRatio: 9 / 16,
-                        child: FadeInImage.assetNetwork(
-                          placeholder: "assets/images/placeholder.jpg",
-                          image:
-                              "https://images.unsplash.com/photo-1545038495-06c466616626?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmlnJTIwc2l6ZXxlbnwwfHwwfHx8MA%3D%3D",
-                          fit: BoxFit.cover,
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            Sizes.size4,
+                          ),
+                        ),
+                        clipBehavior: Clip.hardEdge,
+                        child: AspectRatio(
+                          aspectRatio: 9 / 16,
+                          child: FadeInImage.assetNetwork(
+                            placeholder: "assets/images/placeholder.jpg",
+                            image:
+                                "https://images.unsplash.com/photo-1545038495-06c466616626?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmlnJTIwc2l6ZXxlbnwwfHwwfHx8MA%3D%3D",
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       Gaps.v10,
