@@ -41,6 +41,8 @@ class _ActivityScreenState extends State<ActivityScreen>
     }
   ];
 
+  bool _showBarrier = false;
+
   late final AnimationController _animationController = AnimationController(
     vsync: this,
     duration: const Duration(
@@ -52,8 +54,15 @@ class _ActivityScreenState extends State<ActivityScreen>
       Tween(begin: 0.0, end: 0.5).animate(_animationController);
 
   late final Animation<Offset> _panelAnimation = Tween(
-    begin: Offset(0, -1),
+    begin: const Offset(0, -1),
     end: Offset.zero,
+  ).animate(_animationController);
+
+  late final Animation<Color?> _barrierAnimation = ColorTween(
+    begin: Colors.transparent,
+    end: Colors.black.withOpacity(
+      0.5,
+    ),
   ).animate(_animationController);
 
   void _onDismissed(String notification) {
@@ -61,12 +70,16 @@ class _ActivityScreenState extends State<ActivityScreen>
     setState(() {});
   }
 
-  void _onTitleTap() {
+  void _onToggleAnimations() async {
     if (_animationController.isCompleted) {
-      _animationController.reverse();
+      await _animationController.reverse();
     } else {
       _animationController.forward();
     }
+
+    setState(() {
+      _showBarrier = !_showBarrier;
+    });
   }
 
   @override
@@ -74,7 +87,7 @@ class _ActivityScreenState extends State<ActivityScreen>
     return Scaffold(
       appBar: AppBar(
         title: GestureDetector(
-          onTap: _onTitleTap,
+          onTap: _onToggleAnimations,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -193,10 +206,16 @@ class _ActivityScreenState extends State<ActivityScreen>
                 )
             ],
           ),
+          if (_showBarrier)
+            AnimatedModalBarrier(
+              color: _barrierAnimation,
+              dismissible: true,
+              onDismiss: _onToggleAnimations,
+            ),
           SlideTransition(
             position: _panelAnimation,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(
@@ -222,7 +241,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                           Gaps.h20,
                           Text(
                             tab['title'],
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
