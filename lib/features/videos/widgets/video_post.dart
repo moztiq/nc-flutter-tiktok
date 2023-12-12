@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nc_flutter_tiktok/constants/gaps.dart';
@@ -45,6 +46,10 @@ class _VideoPostState extends State<VideoPost>
     setState(() {});
     await _videoPlayerController.setLooping(true);
     _videoPlayerController.addListener(_onVideoChange);
+
+    if (kIsWeb) {
+      _videoPlayerController.setVolume(0);
+    }
   }
 
   @override
