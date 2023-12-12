@@ -5,6 +5,7 @@ import 'package:nc_flutter_tiktok/constants/sizes.dart';
 import 'package:nc_flutter_tiktok/features/authentication/username_screen.dart';
 import 'package:nc_flutter_tiktok/features/authentication/login_screen.dart';
 import 'package:nc_flutter_tiktok/features/authentication/widgets/auth_button.dart';
+import 'package:nc_flutter_tiktok/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -37,7 +38,6 @@ class SignUpScreen extends StatelessWidget {
         //   );
         // }
         return Scaffold(
-          backgroundColor: Colors.white,
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(
@@ -54,12 +54,14 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   Gaps.v20,
-                  const Text(
-                    'Create a profile, follow other accounts, make your own videos, and more.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black45,
-                      fontSize: Sizes.size16,
+                  Opacity(
+                    opacity: 0.7,
+                    child: Text(
+                      'Create a profile, follow other accounts, make your own videos, and more.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: Sizes.size16,
+                      ),
                     ),
                   ),
                   Gaps.v36,
@@ -101,7 +103,6 @@ class SignUpScreen extends StatelessWidget {
             ),
           ),
           bottomNavigationBar: BottomAppBar(
-            color: Colors.grey.shade50,
             elevation: 1,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
