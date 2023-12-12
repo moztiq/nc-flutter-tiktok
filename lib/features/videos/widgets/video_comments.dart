@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nc_flutter_tiktok/constants/gaps.dart';
 import 'package:nc_flutter_tiktok/constants/sizes.dart';
+import 'package:nc_flutter_tiktok/utils.dart';
 
 class VideoComments extends StatefulWidget {
   const VideoComments({super.key});
@@ -33,6 +34,7 @@ class _VideoCommentsState extends State<VideoComments> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Container(
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
@@ -42,9 +44,9 @@ class _VideoCommentsState extends State<VideoComments> {
         ),
       ),
       child: Scaffold(
-        backgroundColor: Colors.grey.shade50,
+        backgroundColor: isDark ? null : Colors.grey.shade50,
         appBar: AppBar(
-          backgroundColor: Colors.grey.shade50,
+          backgroundColor: isDark ? null : Colors.grey.shade50,
           title: const Text('2274 comments'),
           automaticallyImplyLeading: false,
           actions: [
@@ -121,7 +123,6 @@ class _VideoCommentsState extends State<VideoComments> {
           ),
         ),
         bottomSheet: BottomAppBar(
-          color: Colors.white,
           child: Row(
             children: [
               CircleAvatar(
@@ -148,7 +149,8 @@ class _VideoCommentsState extends State<VideoComments> {
                       borderSide: BorderSide.none,
                     ),
                     filled: true,
-                    fillColor: Colors.grey.shade300,
+                    fillColor:
+                        isDark ? Colors.grey.shade700 : Colors.grey.shade300,
                     contentPadding: const EdgeInsets.symmetric(
                       vertical: Sizes.size12,
                       horizontal: Sizes.size10,
@@ -162,17 +164,23 @@ class _VideoCommentsState extends State<VideoComments> {
                         children: [
                           FaIcon(
                             FontAwesomeIcons.at,
-                            color: Colors.grey.shade900,
+                            color: isDark
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade900,
                           ),
                           Gaps.h12,
                           FaIcon(
                             FontAwesomeIcons.gift,
-                            color: Colors.grey.shade900,
+                            color: isDark
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade900,
                           ),
                           Gaps.h12,
                           FaIcon(
                             FontAwesomeIcons.faceSmile,
-                            color: Colors.grey.shade900,
+                            color: isDark
+                                ? Colors.grey.shade400
+                                : Colors.grey.shade900,
                           ),
                           Gaps.h12,
                           if (_isWriting)
