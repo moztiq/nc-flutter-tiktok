@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -78,6 +79,55 @@ class _SettingsScreenState extends State<SettingsScreen> {
               'What is your birthday?',
             ),
             subtitle: Text('About this app...'),
+          ),
+          ListTile(
+            title: Text('Log out (iOS)'),
+            textColor: Colors.red,
+            onTap: () {
+              showCupertinoDialog(
+                context: context,
+                builder: (context) => CupertinoAlertDialog(
+                  title: Text('Are you sure?'),
+                  content: Text('Please dont go'),
+                  actions: [
+                    CupertinoDialogAction(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text('No'),
+                    ),
+                    CupertinoDialogAction(
+                      onPressed: () => Navigator.of(context).pop(),
+                      isDestructiveAction: true,
+                      child: Text('Yes'),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: Text('Log out (Android)'),
+            textColor: Colors.red,
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  icon: FaIcon(FontAwesomeIcons.skull),
+                  title: Text('Are you sure?'),
+                  content: Text('Please dont go'),
+                  actions: [
+                    IconButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      icon: FaIcon(FontAwesomeIcons.car),
+                    ),
+                    CupertinoDialogAction(
+                      onPressed: () => Navigator.of(context).pop(),
+                      isDestructiveAction: true,
+                      child: Text('Yes'),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
           AboutListTile()
         ],
