@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nc_flutter_tiktok/constants/sizes.dart';
 
@@ -10,45 +11,22 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Settings'),
       ),
-      body: ListWheelScrollView(
-        useMagnifier: true,
-        magnification: 1.5,
-        itemExtent: 200,
+      body: ListView(
         children: [
-          for (var x in [
-            1,
-            2,
-            3,
-            4,
-            1,
-            2,
-            3,
-            4,
-            1,
-            2,
-            3,
-            41,
-            2,
-            4,
-            32,
-            1,
-            23,
-            4,
-          ])
-            FractionallySizedBox(
-              widthFactor: 1,
-              child: Container(
-                color: Colors.teal,
-                alignment: Alignment.center,
-                child: Text(
-                  'Pick me',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: Sizes.size36,
-                  ),
-                ),
+          ListTile(
+            onTap: () => showAboutDialog(
+                context: context,
+                applicationVersion: '1.0',
+                applicationLegalese: 'All rights reserved.'),
+            title: Text(
+              'About',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
               ),
             ),
+            subtitle: Text('About this app...'),
+          ),
+          AboutListTile()
         ],
       ),
     );
