@@ -36,12 +36,14 @@ class LoginScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               Gaps.v20,
-              const Text(
-                'Manage your account, check notifications, comment on videos, and more.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black45,
-                  fontSize: Sizes.size16,
+              Opacity(
+                opacity: 0.7,
+                child: const Text(
+                  'Manage your account, check notifications, comment on videos, and more.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: Sizes.size16,
+                  ),
                 ),
               ),
               Gaps.v40,
@@ -61,7 +63,6 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.grey.shade50,
         elevation: 1,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
