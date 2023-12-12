@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nc_flutter_tiktok/constants/gaps.dart';
+import 'package:nc_flutter_tiktok/utils.dart';
 
 class NavBar extends StatelessWidget {
   final IconData icon;
@@ -26,7 +27,7 @@ class NavBar extends StatelessWidget {
       child: GestureDetector(
         onTap: () => onTap(),
         child: Container(
-          color: selectedIndex == 0 ? Colors.black : Colors.white,
+          color: isDarkMode(context) ? Colors.black : Colors.white,
           child: AnimatedOpacity(
             duration: const Duration(
               milliseconds: 200,
@@ -37,13 +38,13 @@ class NavBar extends StatelessWidget {
               children: [
                 FaIcon(
                   isSelected ? selectedIcon : icon,
-                  color: selectedIndex == 0 ? Colors.white : Colors.black,
+                  color: isDarkMode(context) ? Colors.white : Colors.black,
                 ),
                 Gaps.v5,
                 Text(
                   text,
                   style: TextStyle(
-                    color: selectedIndex == 0 ? Colors.white : Colors.black,
+                    color: isDarkMode(context) ? Colors.white : Colors.black,
                   ),
                 ),
               ],

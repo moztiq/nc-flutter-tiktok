@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nc_flutter_tiktok/constants/breakpoints.dart';
 import 'package:nc_flutter_tiktok/constants/gaps.dart';
 import 'package:nc_flutter_tiktok/constants/sizes.dart';
+import 'package:nc_flutter_tiktok/utils.dart';
 
 final tabs = ['Top', 'Users', 'Videos', 'Sounds', 'LIVE', 'Shopping', 'Brands'];
 
@@ -44,6 +45,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 controller: _textEditingController,
                 onChanged: _onChanged,
                 onSubmitted: _onSubmitted,
+                style: TextStyle(
+                  color: isDarkMode(context) ? Colors.white : Colors.black,
+                ),
               ),
             ),
             bottom: TabBar(
@@ -52,13 +56,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 horizontal: Sizes.size16,
               ),
               isScrollable: true,
-              labelColor: Colors.black,
               labelStyle: const TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: Sizes.size16,
               ),
-              unselectedLabelColor: Colors.grey.shade500,
-              indicatorColor: Colors.black,
               tabs: [
                 for (var tab in tabs)
                   Tab(
@@ -112,42 +113,44 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Gaps.v5,
-                        if (constraints.maxWidth < 200 ||
-                            constraints.maxWidth > 250)
-                          DefaultTextStyle(
-                            style: TextStyle(
-                              color: Colors.grey.shade600,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            child: Row(
-                              children: [
-                                const CircleAvatar(
-                                  radius: Sizes.size12,
-                                  backgroundImage: NetworkImage(
-                                    'https://avatars.githubusercontent.com/u/12403584?v=4',
-                                  ),
+                        // if (constraints.maxWidth < 200 ||
+                        //     constraints.maxWidth > 250)
+                        DefaultTextStyle(
+                          style: TextStyle(
+                            color: isDarkMode(context)
+                                ? Colors.grey.shade50
+                                : Colors.grey.shade600,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          child: Row(
+                            children: [
+                              const CircleAvatar(
+                                radius: Sizes.size12,
+                                backgroundImage: NetworkImage(
+                                  'https://avatars.githubusercontent.com/u/12403584?v=4',
                                 ),
-                                Gaps.h4,
-                                const Expanded(
-                                  child: Text(
-                                    'My avatar is going to be very long',
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+                              ),
+                              Gaps.h4,
+                              const Expanded(
+                                child: Text(
+                                  'My avatar is going to be very long',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                Gaps.h4,
-                                FaIcon(
-                                  FontAwesomeIcons.heart,
-                                  size: Sizes.size16,
-                                  color: Colors.grey.shade600,
-                                ),
-                                Gaps.h2,
-                                const Text(
-                                  '2.5M',
-                                ),
-                              ],
-                            ),
-                          )
+                              ),
+                              Gaps.h4,
+                              FaIcon(
+                                FontAwesomeIcons.heart,
+                                size: Sizes.size16,
+                                color: Colors.grey.shade600,
+                              ),
+                              Gaps.h2,
+                              const Text(
+                                '2.5M',
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),
