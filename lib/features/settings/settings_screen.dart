@@ -23,7 +23,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: const Text('Settings'),
       ),
       body: ListView(
         children: [
@@ -35,14 +35,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
             activeColor: Colors.black,
             value: _notifications,
             onChanged: _onNotificationsChanged,
-            title: Text('Switch Notifications'),
-            subtitle: Text('this is subtitle'),
+            title: const Text('Enable Notifications'),
+            subtitle: const Text('this is subtitle'),
           ),
           CheckboxListTile(
             activeColor: Colors.black,
             value: _notifications,
             onChanged: _onNotificationsChanged,
-            title: Text('Notifications'),
+            title: const Text('Marketing Email'),
+            subtitle: const Text('We wont spam you'),
           ),
           ListTile(
             onTap: () async {
@@ -65,7 +66,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   builder: (context, child) {
                     return Theme(
                       data: ThemeData(
-                        appBarTheme: AppBarTheme(
+                        appBarTheme: const AppBarTheme(
                           foregroundColor: Colors.white,
                           backgroundColor: Colors.black,
                         ),
@@ -75,29 +76,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   });
               print(booking);
             },
-            title: Text(
+            title: const Text(
               'What is your birthday?',
             ),
-            subtitle: Text('About this app...'),
+            subtitle: const Text('About this app...'),
           ),
           ListTile(
-            title: Text('Log out (iOS)'),
+            title: const Text('Log out (iOS)'),
             textColor: Colors.red,
             onTap: () {
               showCupertinoDialog(
                 context: context,
                 builder: (context) => CupertinoAlertDialog(
-                  title: Text('Are you sure?'),
-                  content: Text('Please dont go'),
+                  title: const Text('Are you sure?'),
+                  content: const Text('Please dont go'),
                   actions: [
                     CupertinoDialogAction(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: Text('No'),
+                      child: const Text('No'),
                     ),
                     CupertinoDialogAction(
                       onPressed: () => Navigator.of(context).pop(),
                       isDestructiveAction: true,
-                      child: Text('Yes'),
+                      child: const Text('Yes'),
                     ),
                   ],
                 ),
@@ -105,31 +106,56 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
           ListTile(
-            title: Text('Log out (Android)'),
+            title: const Text('Log out (Android)'),
             textColor: Colors.red,
             onTap: () {
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  icon: FaIcon(FontAwesomeIcons.skull),
-                  title: Text('Are you sure?'),
-                  content: Text('Please dont go'),
+                  icon: const FaIcon(FontAwesomeIcons.skull),
+                  title: const Text('Are you sure?'),
+                  content: const Text('Please dont go'),
                   actions: [
                     IconButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      icon: FaIcon(FontAwesomeIcons.car),
+                      icon: const FaIcon(FontAwesomeIcons.car),
                     ),
                     CupertinoDialogAction(
                       onPressed: () => Navigator.of(context).pop(),
                       isDestructiveAction: true,
-                      child: Text('Yes'),
+                      child: const Text('Yes'),
                     ),
                   ],
                 ),
               );
             },
           ),
-          AboutListTile()
+          ListTile(
+            title: const Text('Log out (iOS / Bottom)'),
+            textColor: Colors.red,
+            onTap: () {
+              showCupertinoModalPopup(
+                context: context,
+                builder: (context) => CupertinoActionSheet(
+                  title: const Text('Are you sure?'),
+                  message: const Text('Please don go'),
+                  actions: [
+                    CupertinoActionSheetAction(
+                      isDefaultAction: true,
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('Not Log out'),
+                    ),
+                    CupertinoActionSheetAction(
+                      onPressed: () => Navigator.of(context).pop(),
+                      isDestructiveAction: true,
+                      child: const Text('Yes'),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+          const AboutListTile()
         ],
       ),
     );
