@@ -7,6 +7,8 @@ import 'package:nc_flutter_tiktok/features/authentication/widgets/auth_button.da
 import 'package:nc_flutter_tiktok/generated/l10n.dart';
 
 class LoginScreen extends StatelessWidget {
+  static String routeName = "/login";
+
   const LoginScreen({super.key});
 
   void _onSignUpTap(BuildContext context) {
