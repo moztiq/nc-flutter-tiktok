@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:nc_flutter_tiktok/constants/sizes.dart';
-import 'package:nc_flutter_tiktok/features/authentication/sign_up_screen.dart';
 import 'package:nc_flutter_tiktok/generated/l10n.dart';
 import 'package:nc_flutter_tiktok/router.dart';
 

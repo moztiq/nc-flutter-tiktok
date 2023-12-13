@@ -6,7 +6,9 @@ import 'package:nc_flutter_tiktok/features/settings/settings_screen.dart';
 import 'package:nc_flutter_tiktok/features/users/widgets/persistent_tabbar.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  const UserProfileScreen({super.key});
+  final String username;
+
+  const UserProfileScreen({super.key, required this.username});
 
   @override
   State<UserProfileScreen> createState() => _UserProfileScreenState();
@@ -31,7 +33,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           child: NestedScrollView(
             headerSliverBuilder: (context, index) => [
               SliverAppBar(
-                title: Text('Moz'),
+                title: Text(widget.username),
                 actions: [
                   IconButton(
                     onPressed: _onGearPressed,
@@ -57,7 +59,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '@moz',
+                          '@${widget.username}',
                           style: TextStyle(
                             fontSize: Sizes.size18,
                             fontWeight: FontWeight.w600,
