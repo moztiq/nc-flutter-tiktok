@@ -10,12 +10,13 @@ import 'package:nc_flutter_tiktok/generated/l10n.dart';
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
-  void _onLoginTap(BuildContext context) {
-    Navigator.of(context).push(
+  void _onLoginTap(BuildContext context) async {
+    final result = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const LoginScreen(),
       ),
     );
+    print(result);
   }
 
   void _onEmailTap(BuildContext context) {
@@ -28,8 +29,6 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(Localizations.localeOf(context));
-
     return OrientationBuilder(
       builder: (context, orientation) {
         // if (orientation == Orientation.landscape) {
@@ -49,8 +48,8 @@ class SignUpScreen extends StatelessWidget {
                 children: [
                   Gaps.v80,
                   Text(
-                    S.of(context).signUpTitle('TikTok', DateTime.now()),
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    S.of(context).signUpTitle('TikTok'),
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   Gaps.v20,
                   Opacity(
@@ -111,7 +110,7 @@ class SignUpScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () => _onLoginTap(context),
                   child: Text(
-                    S.of(context).logIn('male'),
+                    S.of(context).logIn,
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w700,

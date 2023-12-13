@@ -27,14 +27,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(value) => "${value}";
 
-  static String m3(gender) => "로그인";
+  static String m3(nameOfTheApp) => "${nameOfTheApp} 로그인";
 
-  static String m4(nameOfTheApp) => "${nameOfTheApp} 로그인";
-
-  static String m5(videoCount) =>
+  static String m4(videoCount) =>
       "프로필을 만들고, 다른 계정을 팔로우하고, 나만의 동영상을 만드는 등의 작업을 할 수 있습니다.";
 
-  static String m6(nameOfTheApp, when) => "${nameOfTheApp} 가입하기 ${when}";
+  static String m5(nameOfTheApp) => "${nameOfTheApp} 가입하기";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -46,9 +44,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailAndPasswordButton":
             MessageLookupByLibrary.simpleMessage("이메일 가입하기"),
         "likeCount": m2,
-        "logIn": m3,
-        "loginTitle": m4,
-        "signUpSubTitle": m5,
-        "signUpTitle": m6
+        "logIn": MessageLookupByLibrary.simpleMessage("로그인"),
+        "loginTitle": m3,
+        "signUpSubTitle": m4,
+        "signUpTitle": m5
       };
 }
