@@ -1,5 +1,5 @@
 {
-  "signUpTitle": "{nameOfTheApp} 가입하기",
+  "signUpTitle": "{nameOfTheApp} 가입하기 {when}",
   "@signUpTitle": {
     "description": "The title people see when they open the app for the first time.",
     "placeholders": {
