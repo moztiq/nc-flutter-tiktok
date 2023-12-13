@@ -23,5 +23,8 @@
   "emailAndPasswordButton": "이메일 가입하기",
   "appleButton": "애플로그인으로 시작하기",
   "alreadyHaveAnAccount": "이미 계정이 있으신가요?",
-  "logIn": "로그인"
+  "logIn": "로그인",
+  "likeCount": "{value}",
+  "commentCount": "{value}",
+  "commentTitle": "{value} {value2, plural, =1{comment} other{comments}}"
 }
