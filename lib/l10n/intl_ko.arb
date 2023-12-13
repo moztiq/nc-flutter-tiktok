@@ -1,0 +1,26 @@
+{
+  "signUpTitle": "{nameOfTheApp} 가입하기",
+  "@signUpTitle": {
+    "description": "The title people see when they open the app for the first time.",
+    "placeholders": {
+      "nameOfTheApp": {
+        "type": "String",
+        "example": "TikTok"
+      }
+    }
+  },
+  "loginTitle": "{nameOfTheApp} 로그인",
+  "@loginTitle": {
+    "description": "The title people see when they open the login screen.",
+    "placeholders": {
+      "nameOfTheApp": {
+        "type": "String",
+        "example": "TikTok"
+      }
+    }
+  },
+  "signUpSubTitle": "Create a profile, follow other accounts, make your own videos, and more.",
+  "emailAndPasswordButton": "Use email and password",
+  "appleButton": "Continue with Apple",
+  "alreadyHaveAnAccount": "Already have an account?"
+}
