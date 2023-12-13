@@ -63,9 +63,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         ),
         Offstage(
           offstage: _selectedIndex != 4,
-          child: UserProfileScreen(
-            username: 'moz',
-          ),
+          child: UserProfileScreen(username: 'moz', tab: ''),
         ),
       ]),
       bottomNavigationBar: BottomAppBar(

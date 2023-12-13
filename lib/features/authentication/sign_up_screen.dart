@@ -43,7 +43,8 @@ class SignUpScreen extends StatelessWidget {
     //     },
     //   ),
     // );
-    context.push(UsernameScreen.routeName);
+    // context.push(UsernameScreen.routeName);
+    context.push('/users/moz?show=likes');
   }
 
   @override
