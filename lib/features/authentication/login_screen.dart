@@ -4,6 +4,7 @@ import 'package:nc_flutter_tiktok/constants/gaps.dart';
 import 'package:nc_flutter_tiktok/constants/sizes.dart';
 import 'package:nc_flutter_tiktok/features/authentication/login_form_screen.dart';
 import 'package:nc_flutter_tiktok/features/authentication/widgets/auth_button.dart';
+import 'package:nc_flutter_tiktok/generated/l10n.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -32,7 +33,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               Gaps.v80,
               Text(
-                'Log in to TikTok',
+                S.of(context).loginTitle('TikTok'),
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               Gaps.v20,
