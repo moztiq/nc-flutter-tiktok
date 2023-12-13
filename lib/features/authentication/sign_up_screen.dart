@@ -28,6 +28,8 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(Localizations.localeOf(context));
+
     return OrientationBuilder(
       builder: (context, orientation) {
         // if (orientation == Orientation.landscape) {
@@ -47,7 +49,7 @@ class SignUpScreen extends StatelessWidget {
                 children: [
                   Gaps.v80,
                   Text(
-                    'Sign up for TikTok',
+                    'signUpTitle',
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   Gaps.v20,
