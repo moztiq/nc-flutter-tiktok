@@ -9,7 +9,8 @@ import 'package:nc_flutter_tiktok/features/authentication/widgets/auth_button.da
 import 'package:nc_flutter_tiktok/generated/l10n.dart';
 
 class SignUpScreen extends StatelessWidget {
-  static String routeName = "/";
+  static String routeURL = "/";
+  static String routeName = "signUp";
 
   const SignUpScreen({super.key});
 
@@ -43,8 +44,7 @@ class SignUpScreen extends StatelessWidget {
     //     },
     //   ),
     // );
-    // context.push(UsernameScreen.routeName);
-    context.push('/users/moz?show=likes');
+    context.pushNamed(UsernameScreen.routeName);
   }
 
   @override
