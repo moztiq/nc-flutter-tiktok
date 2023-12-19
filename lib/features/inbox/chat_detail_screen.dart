@@ -5,7 +5,12 @@ import 'package:nc_flutter_tiktok/constants/gaps.dart';
 import 'package:nc_flutter_tiktok/constants/sizes.dart';
 
 class ChatDetailScreen extends StatefulWidget {
-  const ChatDetailScreen({super.key});
+  static const String routeName = "chatsDetail";
+  static const String routeURL = ":chatId";
+
+  final String chatId;
+
+  const ChatDetailScreen({super.key, required this.chatId});
 
   @override
   State<ChatDetailScreen> createState() => _ChatDetailScreenState();
@@ -16,7 +21,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const ListTile(
+        title: ListTile(
           contentPadding: EdgeInsets.zero,
           horizontalTitleGap: Sizes.size10,
           leading: CircleAvatar(
@@ -26,7 +31,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             ),
           ),
           title: Text(
-            'Sue',
+            'Sue (${widget.chatId})',
             style: TextStyle(
               fontWeight: FontWeight.w600,
             ),

@@ -4,16 +4,7 @@ import 'package:nc_flutter_tiktok/constants/sizes.dart';
 import 'package:nc_flutter_tiktok/features/authentication/password_screen.dart';
 import 'package:nc_flutter_tiktok/features/authentication/widgets/form_button.dart';
 
-class EmailScreenArgs {
-  final String username;
-
-  EmailScreenArgs({required this.username});
-}
-
 class EmailScreen extends StatefulWidget {
-  static String routeName = "email";
-  static String routeURL = "email";
-
   final String username;
 
   const EmailScreen({super.key, required this.username});

@@ -12,6 +12,9 @@ import 'package:nc_flutter_tiktok/features/videos/widgets/flash.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
+  static const String routeName = "postVideo";
+  static const String routeURL = "/upload";
+
   const VideoRecordingScreen({super.key});
 
   @override
@@ -149,14 +152,15 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   @override
   void dispose() {
     _buttonAnimationController.dispose();
-    _cameraController.dispose();
     _progressAnimationController.dispose();
+    if (!_noCamera) _cameraController.dispose();
 
     super.dispose();
   }
 
   @override
   Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (!_noCamera) return;
     if (!_hasPermission) return;
     if (!_cameraController.value.isInitialized) return;
 
@@ -211,6 +215,13 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                 children: [
                   if (!_noCamera && _cameraController.value.isInitialized)
                     CameraPreview(_cameraController),
+                  Positioned(
+                    left: Sizes.size10,
+                    top: Sizes.size32,
+                    child: CloseButton(
+                      color: Colors.white,
+                    ),
+                  ),
                   if (!_noCamera)
                     Positioned(
                       right: Sizes.size10,
