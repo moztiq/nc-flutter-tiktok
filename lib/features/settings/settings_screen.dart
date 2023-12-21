@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nc_flutter_tiktok/common/widgets/video_config/video_config.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -32,17 +33,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         body: ListView(
           children: [
-            ValueListenableBuilder(
-              valueListenable: videoConfig,
-              builder: (context, value, child) => SwitchListTile.adaptive(
-                activeColor: Colors.black,
-                value: value,
-                onChanged: (value) {
-                  videoConfig.value = !videoConfig.value;
-                },
-                title: const Text('Mute video'),
-                subtitle: const Text('Videos will be muted by default.'),
-              ),
+            SwitchListTile.adaptive(
+              activeColor: Colors.black,
+              value: context.watch<VideoConfig>().isMuted,
+              onChanged: (value) {
+                context.read<VideoConfig>().toggleIsMuted();
+              },
+              title: const Text('Mute video'),
+              subtitle: const Text('Videos will be muted by default.'),
+            ),
+            SwitchListTile.adaptive(
+              activeColor: Colors.black,
+              value: _notifications,
+              onChanged: _onNotificationsChanged,
+              title: const Text('Mute video'),
+              subtitle: const Text('Videos will be muted by default.'),
             ),
             CheckboxListTile(
               activeColor: Colors.black,
