@@ -46,8 +46,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               activeColor: Colors.black,
               value: _notifications,
               onChanged: _onNotificationsChanged,
-              title: const Text('Mute video'),
-              subtitle: const Text('Videos will be muted by default.'),
+              title: const Text('Enable Notifications'),
+              subtitle: const Text('They will be cute.'),
             ),
             CheckboxListTile(
               activeColor: Colors.black,
