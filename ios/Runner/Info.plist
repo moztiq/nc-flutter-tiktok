@@ -22,10 +22,27 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>app-1-77712420958-ios-ab61afdbcfb30fe14b84cf</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>your usage description here</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>your usage description here</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Plz let me see your photos</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -41,11 +58,5 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-    <string>your usage description here</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>your usage description here</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Plz let me see your photos</string>
 </dict>
 </plist>
