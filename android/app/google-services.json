@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "77712420958",
+    "project_id": "moztiq-nc-tiktok-clone",
+    "storage_bucket": "moztiq-nc-tiktok-clone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77712420958:android:20130c7db0b60ad04b84cf",
+        "android_client_info": {
+          "package_name": "com.example.nc_flutter_tiktok"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD6aoriDRox7IMiSMBIbdlUMX_qMs81xA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
