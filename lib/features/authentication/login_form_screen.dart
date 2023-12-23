@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nc_flutter_tiktok/constants/gaps.dart';
 import 'package:nc_flutter_tiktok/constants/sizes.dart';
+import 'package:nc_flutter_tiktok/features/authentication/view_models/login_view_model.dart';
 import 'package:nc_flutter_tiktok/features/authentication/widgets/form_button.dart';
-import 'package:nc_flutter_tiktok/features/onboarding/interests_screen.dart';
 
-class LoginFormScreen extends StatefulWidget {
+class LoginFormScreen extends ConsumerStatefulWidget {
   const LoginFormScreen({super.key});
 
   @override
-  State<LoginFormScreen> createState() => _LoginFormScreenState();
+  LoginFormScreenState createState() => LoginFormScreenState();
 }
 
-class _LoginFormScreenState extends State<LoginFormScreen> {
+class LoginFormScreenState extends ConsumerState<LoginFormScreen> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Map<String, String> formData = {};
 
@@ -20,7 +20,12 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     if (_formKey.currentState != null) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        context.goNamed(InterestsScreen.routeName);
+        ref.read(loginProvider.notifier).login(
+              formData['email']!,
+              formData['password']!,
+              context,
+            );
+        // context.goNamed(InterestsScreen.routeName);
       }
     }
   }
@@ -47,8 +52,10 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 validator: (value) {
                   return null;
                 },
-                onSaved: (newValue) => {
-                  if (newValue != null) {formData['email'] = newValue}
+                onSaved: (newValue) {
+                  if (newValue != null) {
+                    formData['email'] = newValue;
+                  }
                 },
               ),
               Gaps.v16,
@@ -59,12 +66,17 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 validator: (value) {
                   return null;
                 },
-                onSaved: (newValue) => {
-                  if (newValue != null) {formData['password'] = newValue}
+                onSaved: (newValue) {
+                  if (newValue != null) {
+                    formData['password'] = newValue;
+                  }
                 },
               ),
               Gaps.v28,
-              FormButton(disabled: false, onTap: _onSubmit)
+              FormButton(
+                disabled: ref.watch(loginProvider).isLoading,
+                onTap: _onSubmit,
+              )
             ],
           ),
         ),
