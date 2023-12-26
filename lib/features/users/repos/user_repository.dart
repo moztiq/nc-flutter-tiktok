@@ -7,9 +7,13 @@ import 'package:nc_flutter_tiktok/features/users/models/user_profile_model.dart'
 class UserRepository {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  // create profile
   Future<void> createProfile(UserProfileModel profile) async {
     await _db.collection('users').doc(profile.uid).set(profile.toJson());
+  }
+
+  Future<Map<String, dynamic>?> getProfile(String uid) async {
+    final doc = await _db.collection('users').doc(uid).get();
+    return doc.data();
   }
 }
 
