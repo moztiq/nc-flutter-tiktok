@@ -19,4 +19,14 @@ class UserProfileModel {
     required this.bio,
     required this.link,
   });
+
+  Map<String, String> toJson() {
+    return {
+      "uid": uid,
+      "email": email,
+      "name": name,
+      "bio": bio,
+      "link": link,
+    };
+  }
 }

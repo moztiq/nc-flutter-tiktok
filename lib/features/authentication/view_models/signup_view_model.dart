@@ -25,7 +25,7 @@ class SignUpViewModel extends AsyncNotifier<void> {
           form['email'],
           form['password'],
         );
-        ref.read(usersProvider.notifier).createAccount(userCredentials);
+        ref.read(usersProvider.notifier).createProfile(userCredentials);
       },
     );
 
