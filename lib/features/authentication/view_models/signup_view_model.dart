@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nc_flutter_tiktok/features/authentication/repos/authentication_repo.dart';
 import 'package:nc_flutter_tiktok/features/onboarding/interests_screen.dart';
+import 'package:nc_flutter_tiktok/features/users/view_models/users_view_model.dart';
 import 'package:nc_flutter_tiktok/utils.dart';
 
 class SignUpViewModel extends AsyncNotifier<void> {
@@ -19,10 +20,13 @@ class SignUpViewModel extends AsyncNotifier<void> {
     state = AsyncValue.loading();
     final form = ref.read(signUpForm);
     state = await AsyncValue.guard(
-      () async => await _authRepo.emailSignUp(
-        form['email'],
-        form['password'],
-      ),
+      () async {
+        final userCredentials = await _authRepo.emailSignUp(
+          form['email'],
+          form['password'],
+        );
+        ref.read(usersProvider.notifier).createAccount(userCredentials);
+      },
     );
 
     if (state.hasError) {
