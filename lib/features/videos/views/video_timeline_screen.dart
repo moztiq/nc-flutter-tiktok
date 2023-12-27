@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nc_flutter_tiktok/features/videos/repos/videos_repo.dart';
 import 'package:nc_flutter_tiktok/features/videos/view_models/timeline_view_model.dart';
 import 'package:nc_flutter_tiktok/features/videos/views/widgets/video_post.dart';
 
@@ -42,12 +43,8 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
     super.dispose();
   }
 
-  Future<void> _onRefresh() {
-    return Future.delayed(
-      const Duration(
-        seconds: 1,
-      ),
-    );
+  Future<void> _onRefresh() async {
+    return ref.read(timelineProvider.notifier).refresh();
   }
 
   @override
