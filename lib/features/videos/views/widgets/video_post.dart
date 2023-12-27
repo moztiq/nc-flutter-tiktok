@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nc_flutter_tiktok/constants/gaps.dart';
 import 'package:nc_flutter_tiktok/constants/sizes.dart';
+import 'package:nc_flutter_tiktok/features/videos/models/video_model.dart';
 import 'package:nc_flutter_tiktok/features/videos/view_models/playback_config_vm.dart';
 import 'package:nc_flutter_tiktok/features/videos/views/widgets/video_button.dart';
 import 'package:nc_flutter_tiktok/features/videos/views/widgets/video_comments.dart';
@@ -14,11 +15,13 @@ import 'package:visibility_detector/visibility_detector.dart';
 class VideoPost extends ConsumerStatefulWidget {
   final Function onVideoFinished;
   final int index;
+  final VideoModel videoData;
 
   const VideoPost({
     super.key,
     required this.onVideoFinished,
     required this.index,
+    required this.videoData,
   });
 
   @override
@@ -134,8 +137,9 @@ class VideoPostState extends ConsumerState<VideoPost>
           Positioned.fill(
             child: _videoPlayerController.value.isInitialized
                 ? VideoPlayer(_videoPlayerController)
-                : Container(
-                    color: Colors.black,
+                : Image.network(
+                    widget.videoData.thumbnailUrl,
+                    fit: BoxFit.cover,
                   ),
           ),
           Positioned.fill(
@@ -180,14 +184,14 @@ class VideoPostState extends ConsumerState<VideoPost>
               onPressed: _onPlaybackConfigChanged,
             ),
           ),
-          const Positioned(
+          Positioned(
             bottom: 30,
             left: 20,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '@moztiq',
+                  '@${widget.videoData.creator}',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: Sizes.size20,
@@ -196,7 +200,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                 ),
                 Gaps.v10,
                 Text(
-                  'mozart music quiz',
+                  '${widget.videoData.description}',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: Sizes.size14,
@@ -214,22 +218,22 @@ class VideoPostState extends ConsumerState<VideoPost>
                   radius: 25,
                   backgroundColor: Colors.black,
                   foregroundColor: Colors.white,
-                  child: Text('moz'),
+                  child: Text('${widget.videoData.creator}'),
                   foregroundImage: NetworkImage(
-                    'https://avatars.githubusercontent.com/u/12403584?v=4',
+                    'https://firebasestorage.googleapis.com/v0/b/moztiq-nc-tiktok-clone.appspot.com/o/avatars%2F${widget.videoData.creatorUid}?alt=media}',
                   ),
                 ),
                 Gaps.v24,
                 VideoButton(
                   icon: FontAwesomeIcons.solidHeart,
-                  text: S.of(context).likeCount(9187912342834),
+                  text: S.of(context).likeCount(widget.videoData.likes),
                 ),
                 Gaps.v24,
                 GestureDetector(
                   onTap: () => _onCommentsTap(context),
                   child: VideoButton(
                     icon: FontAwesomeIcons.solidComment,
-                    text: S.of(context).commentCount(2738741),
+                    text: S.of(context).commentCount(widget.videoData.comments),
                   ),
                 ),
                 Gaps.v24,
