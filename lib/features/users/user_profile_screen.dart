@@ -12,8 +12,11 @@ class UserProfileScreen extends ConsumerStatefulWidget {
   final String username;
   final String tab;
 
-  const UserProfileScreen(
-      {super.key, required this.username, required this.tab});
+  const UserProfileScreen({
+    super.key,
+    required this.username,
+    required this.tab,
+  });
 
   @override
   UserProfileScreenState createState() => UserProfileScreenState();
@@ -63,7 +66,11 @@ class UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                       child: Column(
                         children: [
                           Gaps.v20,
-                          Avatar(),
+                          Avatar(
+                            hasAvatar: data.hasAvatar,
+                            uid: data.uid,
+                            name: data.name,
+                          ),
                           Gaps.v20,
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
