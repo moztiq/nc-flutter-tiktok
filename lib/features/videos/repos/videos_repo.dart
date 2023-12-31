@@ -11,7 +11,7 @@ class VideosRepository {
 
   UploadTask uploadVideoFile(File video, String uid) {
     final fileRef = _storage.ref().child(
-        'videos/$uid/${DateTime.now().microsecondsSinceEpoch.toString()}');
+        'videos/$uid/${DateTime.now().millisecondsSinceEpoch.toString()}');
     return fileRef.putFile(video);
   }
 
@@ -38,7 +38,7 @@ class VideosRepository {
     final like = await query.get();
 
     if (!like.exists) {
-      await query.set({"createdAt": DateTime.now().microsecondsSinceEpoch});
+      await query.set({"createdAt": DateTime.now().millisecondsSinceEpoch});
     } else {
       await query.delete();
     }
