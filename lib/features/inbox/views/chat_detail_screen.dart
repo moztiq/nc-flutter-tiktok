@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nc_flutter_tiktok/constants/gaps.dart';
 import 'package:nc_flutter_tiktok/constants/sizes.dart';
+import 'package:nc_flutter_tiktok/features/inbox/view_models/messages_view_model.dart';
 
-class ChatDetailScreen extends StatefulWidget {
+class ChatDetailScreen extends ConsumerStatefulWidget {
   static const String routeName = "chatsDetail";
   static const String routeURL = ":chatId";
 
@@ -13,12 +15,25 @@ class ChatDetailScreen extends StatefulWidget {
   const ChatDetailScreen({super.key, required this.chatId});
 
   @override
-  State<ChatDetailScreen> createState() => _ChatDetailScreenState();
+  ChatDetailScreenState createState() => ChatDetailScreenState();
 }
 
-class _ChatDetailScreenState extends State<ChatDetailScreen> {
+class ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
+  final TextEditingController _editingController = TextEditingController();
+
+  void _onSendPress() {
+    final text = _editingController.text;
+    if (text == '') {
+      return;
+    }
+    ref.read(messagesProvider.notifier).sendMessage(text);
+    _editingController.text = '';
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(messagesProvider).isLoading;
+
     return Scaffold(
       appBar: AppBar(
         title: ListTile(
@@ -108,14 +123,21 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             width: MediaQuery.of(context).size.width,
             child: BottomAppBar(
               color: Colors.grey.shade100,
-              child: const Row(
+              child: Row(
                 children: [
                   Expanded(
-                    child: CupertinoTextField(),
+                    child: CupertinoTextField(
+                      controller: _editingController,
+                    ),
                   ),
                   Gaps.h20,
-                  FaIcon(
-                    FontAwesomeIcons.paperPlane,
+                  IconButton(
+                    icon: FaIcon(
+                      isLoading
+                          ? FontAwesomeIcons.hourglass
+                          : FontAwesomeIcons.paperPlane,
+                    ),
+                    onPressed: isLoading ? null : _onSendPress,
                   )
                 ],
               ),

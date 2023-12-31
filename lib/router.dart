@@ -5,9 +5,9 @@ import 'package:nc_flutter_tiktok/common/widgets/main_navigation/main_navigation
 import 'package:nc_flutter_tiktok/features/authentication/login_screen.dart';
 import 'package:nc_flutter_tiktok/features/authentication/repos/authentication_repo.dart';
 import 'package:nc_flutter_tiktok/features/authentication/sign_up_screen.dart';
-import 'package:nc_flutter_tiktok/features/inbox/activity_screen.dart';
-import 'package:nc_flutter_tiktok/features/inbox/chat_detail_screen.dart';
-import 'package:nc_flutter_tiktok/features/inbox/chats_screen.dart';
+import 'package:nc_flutter_tiktok/features/inbox/views/activity_screen.dart';
+import 'package:nc_flutter_tiktok/features/inbox/views/chat_detail_screen.dart';
+import 'package:nc_flutter_tiktok/features/inbox/views/chats_screen.dart';
 import 'package:nc_flutter_tiktok/features/onboarding/interests_screen.dart';
 import 'package:nc_flutter_tiktok/features/videos/views/video_recording_screen.dart';
 
