@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nc_flutter_tiktok/constants/sizes.dart';
+import 'package:nc_flutter_tiktok/features/notifications/notifications_provider.dart';
 import 'package:nc_flutter_tiktok/features/videos/repos/playback_config_repo.dart';
 import 'package:nc_flutter_tiktok/features/videos/view_models/playback_config_vm.dart';
 import 'package:nc_flutter_tiktok/firebase_options.dart';
@@ -44,6 +45,7 @@ class TikTokApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // S.load(Locale('ko'));
+    ref.watch(notificationsProvider);
     return MaterialApp.router(
       routerConfig: ref.watch(routerProvider),
       themeMode: ThemeMode.system,
