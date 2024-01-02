@@ -32,7 +32,7 @@ final messagesProvider = AsyncNotifierProvider<MessagesViewModel, void>(
   () => MessagesViewModel(),
 );
 
-final chatProvider = StreamProvider<List<MessageModel>>(
+final chatProvider = StreamProvider.autoDispose<List<MessageModel>>(
   (ref) {
     final db = FirebaseFirestore.instance;
     return db
@@ -48,6 +48,8 @@ final chatProvider = StreamProvider<List<MessageModel>>(
                   doc.data(),
                 ),
               )
+              .toList()
+              .reversed
               .toList(),
         );
   },

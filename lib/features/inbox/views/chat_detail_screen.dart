@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nc_flutter_tiktok/constants/gaps.dart';
 import 'package:nc_flutter_tiktok/constants/sizes.dart';
+import 'package:nc_flutter_tiktok/features/authentication/repos/authentication_repo.dart';
 import 'package:nc_flutter_tiktok/features/inbox/view_models/messages_view_model.dart';
 
 class ChatDetailScreen extends ConsumerStatefulWidget {
@@ -70,54 +71,70 @@ class ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
       ),
       body: Stack(
         children: [
-          ListView.separated(
-            padding: const EdgeInsets.symmetric(
-              vertical: Sizes.size20,
-              horizontal: Sizes.size14,
-            ),
-            itemBuilder: (context, index) {
-              final isMine = index % 2 == 0;
-              return Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment:
-                    isMine ? MainAxisAlignment.end : MainAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(
-                      Sizes.size14,
+          ref.watch(chatProvider).when(
+                error: (error, stackTrace) => Text(error.toString()),
+                loading: () => Center(
+                  child: CircularProgressIndicator(),
+                ),
+                data: (data) {
+                  return ListView.separated(
+                    reverse: true,
+                    padding: EdgeInsets.only(
+                      top: Sizes.size20,
+                      bottom:
+                          MediaQuery.of(context).padding.bottom + Sizes.size96,
+                      left: Sizes.size14,
+                      right: Sizes.size14,
                     ),
-                    decoration: BoxDecoration(
-                      color:
-                          isMine ? Colors.blue : Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(
-                          Sizes.size20,
-                        ),
-                        topRight: const Radius.circular(
-                          Sizes.size20,
-                        ),
-                        bottomLeft: Radius.circular(
-                          isMine ? Sizes.size20 : Sizes.size5,
-                        ),
-                        bottomRight: Radius.circular(
-                          isMine ? Sizes.size5 : Sizes.size20,
-                        ),
-                      ),
-                    ),
-                    child: const Text(
-                      'this is a message!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: Sizes.size16,
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
-            separatorBuilder: (context, index) => Gaps.v10,
-            itemCount: 10,
-          ),
+                    itemBuilder: (context, index) {
+                      final message = data[index];
+                      final isMine =
+                          message.userId == ref.read(authRepo).user!.uid;
+                      return Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: isMine
+                            ? MainAxisAlignment.end
+                            : MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(
+                              Sizes.size14,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isMine
+                                  ? Colors.blue
+                                  : Theme.of(context).primaryColor,
+                              borderRadius: BorderRadius.only(
+                                topLeft: const Radius.circular(
+                                  Sizes.size20,
+                                ),
+                                topRight: const Radius.circular(
+                                  Sizes.size20,
+                                ),
+                                bottomLeft: Radius.circular(
+                                  isMine ? Sizes.size20 : Sizes.size5,
+                                ),
+                                bottomRight: Radius.circular(
+                                  isMine ? Sizes.size5 : Sizes.size20,
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              message.text,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: Sizes.size16,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                    separatorBuilder: (context, index) => Gaps.v10,
+                    itemCount: data.length,
+                  );
+                },
+              ),
           Positioned(
             bottom: 0,
             width: MediaQuery.of(context).size.width,
